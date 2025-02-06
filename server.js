@@ -1,19 +1,15 @@
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const app = express();
 app.use(express.json());
-const messages = [];
 const {getMessages, addMessage} = require('./database.js');
-
-//Configuracion de las opciones HTTPS
-    const options = {
-        key : fs.readFileSync(path.join(__dirname, 'privkey.pem')),
-        cert : fs.readFileSync(path.join(__dirname, 'fullchain.pem'))
-    }
+const path = require('path');
 
 const APIKEY = "123456";
 
 app.get('/', (req, res) => {
-  res.send('Bienvenido al despliegue del servidor de Dani!');
+  res.send('Bienvenido');
 })
 
 app.get('/message', (req, res) => {    
@@ -44,6 +40,11 @@ app.post('/message', (req, res) => {
   }
 })
 
-https.createServer(options, app),listen(port, () => {    
-    console.log('Servidor corriendo en https://cyberbunny.online:${port}');
-})
+const options = {
+  key: fs.readFileSync(path.join(__dirname, 'privkey.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'fullchain.pem'))
+};
+
+https.createServer(options, app).listen(3000, () => {
+  console.log('Server started on https://dev1.cyberbunny.online:3000');
+});
