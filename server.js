@@ -1,12 +1,19 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+const messages = [];
 const {getMessages, addMessage} = require('./database.js');
+
+//Configuracion de las opciones HTTPS
+    const options = {
+        key : fs.readFileSync(path.join(__dirname, 'privkey.pem')),
+        cert : fs.readFileSync(path.join(__dirname, 'fullchain.pem'))
+    }
 
 const APIKEY = "123456";
 
 app.get('/', (req, res) => {
-  res.send('Bienvenido al despliegue del servidor de Alvaro!');
+  res.send('Bienvenido al despliegue del servidor de Dani!');
 })
 
 app.get('/message', (req, res) => {    
