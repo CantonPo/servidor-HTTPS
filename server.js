@@ -46,5 +46,5 @@ const options = {
 };
 
 https.createServer(options, app).listen(3000, () => {
-  console.log('Server started on https://dev1.cyberbunny.online:3000');
+  console.log('Server started on https://dev8.cyberbunny.online:3000');
 });
